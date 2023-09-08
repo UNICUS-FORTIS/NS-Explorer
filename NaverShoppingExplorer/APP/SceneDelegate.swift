@@ -20,25 +20,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarVC = UITabBarController()
         
         let vc1 = UINavigationController(rootViewController: MainViewController())
-        //    let vc2 = SecondViewController()
+        let vc2 = LikedViewController()
         //    let vc3 = ThirdViewController()
         //    let vc4 = FourthViewController()
         //    let vc5 = FifthViewController()
         
-        vc1.title = "Main"
-        //    vc2.title = "Search"
+        vc1.title = nil
+        vc2.title = nil
         //    vc3.title = "Post"
         //    vc4.title = "Likes"
         //    vc5.title = "Me"
         
-        tabBarVC.setViewControllers([vc1], animated: false)
+        tabBarVC.setViewControllers([vc1, vc2], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.backgroundColor = .white
         tabBarVC.tabBar.tintColor = Constant.Color.naverGreen()
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "house")
-        //    items[1].image = UIImage(systemName: "folder")
+        items[1].image = UIImage(systemName: "heart")
         //    items[2].image = UIImage(systemName: "paperplane")
         //    items[3].image = UIImage(systemName: "doc")
         //    items[4].image = UIImage(systemName: "note")

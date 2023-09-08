@@ -14,8 +14,11 @@ final class SearchResultViewController: UIViewController {
     
     private let networkmanager = NetworkManager.shared
     private let mainView = SearchResultView()
-    private let realm = try! Realm()
+    private let repository = ProductTableRepository.shared
+    private var tasks: Results<Product>!
+    
     var keyword: String?
+    
     var result: Shopping? {
         didSet {
             DispatchQueue.main.async {
@@ -30,9 +33,20 @@ final class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        connectRealm()
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        repository.checkRealmDirectory()
+        repository.checkSchemaVersion()
+        mainView.collectionView.reloadData()
+    }
+    
+    private func connectRealm() {
+        tasks = repository.fetch()
     }
 }
 
@@ -56,7 +70,13 @@ extension SearchResultViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCVCell.identifier, for: indexPath) as? SearchResultCVCell else  { return UICollectionViewCell() }
         
         cell.data = self.result?.items[indexPath.item]
-        
+        if let productID = result?.items[indexPath.item].productID {
+            if let matchedProduct = tasks.first(where: { $0.productId == productID }) {
+                cell.isLiked = matchedProduct.isLiked ?? false
+            } else {
+                cell.isLiked = false
+            }
+        }
         return cell
     }
     

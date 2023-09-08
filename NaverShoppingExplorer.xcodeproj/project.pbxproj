@@ -10,8 +10,9 @@
 		DE3FEB462AAB4B7A00591394 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB452AAB4B7A00591394 /* String+Extension.swift */; };
 		DE3FEB482AAB52E900591394 /* SearchResultReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB472AAB52E900591394 /* SearchResultReusableView.swift */; };
 		DE3FEB4A2AAB7A5500591394 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB492AAB7A5500591394 /* UIImage+Extension.swift */; };
-		DE3FEB4C2AABAD6C00591394 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB4B2AABAD6C00591394 /* UserData.swift */; };
-		DE3FEB4F2AABCA1100591394 /* UserDataTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB4E2AABCA1100591394 /* UserDataTableRepository.swift */; };
+		DE3FEB4C2AABAD6C00591394 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB4B2AABAD6C00591394 /* Product.swift */; };
+		DE3FEB4F2AABCA1100591394 /* ProductTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB4E2AABCA1100591394 /* ProductTableRepository.swift */; };
+		DE3FEB512AABE7B800591394 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB502AABE7B800591394 /* LikedViewController.swift */; };
 		DE4931602AAA96FD000D70F9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49315F2AAA96FD000D70F9 /* UILabel+Extension.swift */; };
 		DE50C0372AAA01A6006AD054 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE50C0362AAA01A6006AD054 /* AppDelegate.swift */; };
 		DE50C0392AAA01A6006AD054 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE50C0382AAA01A6006AD054 /* SceneDelegate.swift */; };
@@ -43,8 +44,9 @@
 		DE3FEB452AAB4B7A00591394 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		DE3FEB472AAB52E900591394 /* SearchResultReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultReusableView.swift; sourceTree = "<group>"; };
 		DE3FEB492AAB7A5500591394 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		DE3FEB4B2AABAD6C00591394 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		DE3FEB4E2AABCA1100591394 /* UserDataTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTableRepository.swift; sourceTree = "<group>"; };
+		DE3FEB4B2AABAD6C00591394 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		DE3FEB4E2AABCA1100591394 /* ProductTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableRepository.swift; sourceTree = "<group>"; };
+		DE3FEB502AABE7B800591394 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
 		DE49315F2AAA96FD000D70F9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		DE50C0332AAA01A6006AD054 /* NaverShoppingExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaverShoppingExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE50C0362AAA01A6006AD054 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,8 +90,8 @@
 		DE3FEB4D2AABC9F100591394 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				DE3FEB4B2AABAD6C00591394 /* UserData.swift */,
-				DE3FEB4E2AABCA1100591394 /* UserDataTableRepository.swift */,
+				DE3FEB4B2AABAD6C00591394 /* Product.swift */,
+				DE3FEB4E2AABCA1100591394 /* ProductTableRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -143,6 +145,7 @@
 			children = (
 				DE50C03A2AAA01A6006AD054 /* MainViewController.swift */,
 				DE50C07C2AAA2763006AD054 /* SearchResultViewController.swift */,
+				DE3FEB502AABE7B800591394 /* LikedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -325,20 +328,21 @@
 				DE50C03B2AAA01A6006AD054 /* MainViewController.swift in Sources */,
 				DE50C0652AAA0683006AD054 /* MainView.swift in Sources */,
 				DE3FEB482AAB52E900591394 /* SearchResultReusableView.swift in Sources */,
+				DE3FEB512AABE7B800591394 /* LikedViewController.swift in Sources */,
 				DE3FEB462AAB4B7A00591394 /* String+Extension.swift in Sources */,
 				DE50C06D2AAA090F006AD054 /* EndPoint.swift in Sources */,
 				DE50C07B2AAA19B0006AD054 /* Shopping.swift in Sources */,
 				DE50C06F2AAA0915006AD054 /* APIService.swift in Sources */,
 				DE50C0782AAA15E6006AD054 /* Parameter.swift in Sources */,
 				DE50C0552AAA0566006AD054 /* Constant.swift in Sources */,
-				DE3FEB4F2AABCA1100591394 /* UserDataTableRepository.swift in Sources */,
+				DE3FEB4F2AABCA1100591394 /* ProductTableRepository.swift in Sources */,
 				DE50C0372AAA01A6006AD054 /* AppDelegate.swift in Sources */,
 				DE50C0762AAA1455006AD054 /* URL+Extension.swift in Sources */,
 				DE50C0392AAA01A6006AD054 /* SceneDelegate.swift in Sources */,
 				DE50C07F2AAA33CB006AD054 /* SearchResultView.swift in Sources */,
 				DE4931602AAA96FD000D70F9 /* UILabel+Extension.swift in Sources */,
 				DE3FEB4A2AAB7A5500591394 /* UIImage+Extension.swift in Sources */,
-				DE3FEB4C2AABAD6C00591394 /* UserData.swift in Sources */,
+				DE3FEB4C2AABAD6C00591394 /* Product.swift in Sources */,
 				DE50C0852AAA3728006AD054 /* SearchResultCVCell.swift in Sources */,
 				DE50C0682AAA06D8006AD054 /* Protocols.swift in Sources */,
 				DE50C0722AAA0928006AD054 /* APIKey.swift in Sources */,

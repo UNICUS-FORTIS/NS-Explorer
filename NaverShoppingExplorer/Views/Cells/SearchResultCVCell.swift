@@ -23,20 +23,21 @@ final class SearchResultCVCell: UICollectionViewCell {
             priceLabel.text = priceLabel.makingCurrency(price: price)
             guard let productId = data?.productID else { return }
             likeButton.tag = Int(productId) ?? 0
-            isLiked = false
         }
     }
     
-    private var isLiked: Bool = false {
+    private let repository = ProductTableRepository.shared
+    
+    var isLiked: Bool? {
         didSet {
-            if isLiked {
+            if isLiked ?? false {
                 likeButton.setImage(Constant.Image.likedIcon, for: .normal)
             } else {
                 likeButton.setImage(Constant.Image.noneLikedIcon, for: .normal)
             }
         }
     }
-
+    
     private let productImage:UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleToFill
@@ -56,23 +57,23 @@ final class SearchResultCVCell: UICollectionViewCell {
     private var mallLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .boldSystemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 13)
         return label
     }()
     
     private var productNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.numberOfLines = 2
-        label.font = .systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .boldSystemFont(ofSize: 14)
         label.lineBreakMode = .byWordWrapping
         return label
     }()
     
     private var priceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 14)
+        label.font = .boldSystemFont(ofSize: 15)
+        label.textColor = .red
         label.numberOfLines = 0
         return label
     }()
@@ -107,8 +108,24 @@ final class SearchResultCVCell: UICollectionViewCell {
     @objc func likeButtonTapped(sender: UIButton)  {
         let convertedProductId = Int(data?.productID ?? "")
         if convertedProductId == sender.tag {
-            self.isLiked.toggle()
+            self.isLiked?.toggle()
         }
+        guard let id = self.data?.productID,
+              let title = self.data?.title else { return }
+        
+        let creatTarget = Product(isLiked: self.isLiked ?? false,
+                           productId: id,
+                           productName: title.cleanString(),
+                           createDate: Date())
+        let removeTarget = repository.fetchFilter(self.data!)
+
+        if self.isLiked == false {
+            repository.removeItem(item: removeTarget)
+        } else if self.isLiked == true {
+            repository.createItem(creatTarget)
+        }
+        
+        
     }
     
     
@@ -119,7 +136,7 @@ final class SearchResultCVCell: UICollectionViewCell {
     
     private func setConstraints() {
         productImage.snp.makeConstraints { make in
-            make.top.equalTo(contentView)
+            make.top.equalTo(contentView).offset(4)
             make.horizontalEdges.equalTo(contentView)
             make.height.equalTo(contentView).multipliedBy(0.7)
         }
