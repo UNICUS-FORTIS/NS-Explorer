@@ -9,6 +9,7 @@ import Foundation
 
 enum Parameter {
     enum Sort {
+        static let accuracy = "sim"
         static let date = "date"
         static let ascending = "asc"
         static let descending = "dsc"

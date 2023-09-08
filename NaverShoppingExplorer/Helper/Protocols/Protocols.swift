@@ -7,7 +7,3 @@
 
 import Foundation
 
-protocol ViewRequirementProtocol {
-    func configure()
-    func setConstraints()
-}

@@ -8,18 +8,24 @@
 import UIKit
 
 protocol ReusableViewProtocol: AnyObject {
-    static var reuseIdentifier: String { get }
+    static var identifier: String { get }
     
 }
 
 extension UIViewController: ReusableViewProtocol {
-    public static var reuseIdentifier: String {
+    public static var identifier: String {
         return String(describing: self)
     }
 }
 
-extension UICollectionViewCell: ReusableViewProtocol {
-    public static var reuseIdentifier: String {
+//extension UICollectionViewCell: ReusableViewProtocol {
+//    public static var identifier: String {
+//        return String(describing: self)
+//    }
+//}
+
+extension UICollectionReusableView: ReusableViewProtocol {
+    static var identifier: String {
         return String(describing: self)
     }
 }

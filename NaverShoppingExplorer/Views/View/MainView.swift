@@ -6,17 +6,18 @@
 //
 
 import UIKit
+import SnapKit
 import TextFieldEffects
 
 
-class MainView: BaseView {
+final class MainView: UIView {
     
     lazy var searchField: UITextField = {
         let tf = HoshiTextField(frame: .zero)
         tf.placeholder = "검색어를 입력해주세요."
         tf.placeholderColor = .darkGray
         tf.layer.cornerRadius = 8
-        tf.layer.borderColor = Constant.naverGreen().cgColor
+        tf.layer.borderColor = Constant.Color.naverGreen().cgColor
         tf.layer.borderWidth = 1
         tf.textColor = .black
         return tf
@@ -24,17 +25,19 @@ class MainView: BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configure()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func configure() {
+     func configure() {
         self.addSubview(searchField)
     }
     
-    override func setConstraints() {
+     func setConstraints() {
         searchField.snp.makeConstraints { make in
             make.centerX.equalTo(self)
             make.top.equalTo(self.safeAreaLayoutGuide).offset(150)

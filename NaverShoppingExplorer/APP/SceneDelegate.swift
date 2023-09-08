@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarVC.setViewControllers([vc1], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.backgroundColor = .white
-        tabBarVC.tabBar.tintColor = Constant.naverGreen()
+        tabBarVC.tabBar.tintColor = Constant.Color.naverGreen()
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "house")

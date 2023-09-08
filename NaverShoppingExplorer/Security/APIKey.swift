@@ -11,9 +11,9 @@ enum APIKey {
     
     enum Headers {
         static let id = "X-Naver-Client-Id"
-        static let idVKey = "Am_0ORsQeqtEwoCPxSoE"
+        static let idKey = "Am_0ORsQeqtEwoCPxSoE"
         static let secret = "X-Naver-Client-Secret"
-        static let secretKEy = "JeiFWqwU8h"
+        static let secretKey = "JeiFWqwU8h"
     }
 }
 
