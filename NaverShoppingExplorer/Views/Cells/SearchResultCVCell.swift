@@ -11,22 +11,33 @@ import Kingfisher
 
 final class SearchResultCVCell: UICollectionViewCell {
     
+    private let repository = ProductTableRepository.shared
+    var reloadTrigger: (() -> Void)?
+    
+    
     var data: ShoppingResult? {
         didSet {
-            guard let imgData = data?.image else { return }
-            let url = URL(string: imgData)
+            guard let data = data else { return }
+            let url = URL(string: data.image)
             productImage.kf.setImage(with: url)
-            guard let mallname = data?.mallName else { return }
-            mallLabel.text = "[\(mallname)]"
-            productNameLabel.text = data?.title.cleanString()
-            guard let price = data?.lprice else { return }
-            priceLabel.text = priceLabel.makingCurrency(price: price)
-            guard let productId = data?.productID else { return }
-            likeButton.tag = Int(productId) ?? 0
+            mallLabel.text = "[\(data.mallName)]"
+            productNameLabel.text = data.title.cleanString()
+            priceLabel.text = priceLabel.makingCurrency(price: data.lprice)
+            likeButton.tag = Int(data.productID) ?? 0
         }
     }
     
-    private let repository = ProductTableRepository.shared
+    var storedData: Product? {
+        didSet {
+            guard let storedData = storedData else { return }
+            let loadedImg = repository.loadImageFromDocument(filename: "stored\(storedData._id).jpg")
+            productImage.image = loadedImg
+            mallLabel.text = storedData.mallName
+            productNameLabel.text = storedData.productName
+            priceLabel.text = priceLabel.makingCurrency(price: storedData.productPrice)
+            likeButton.tag = Int(storedData.productId) ?? 0
+        }
+    }
     
     var isLiked: Bool? {
         didSet {
@@ -110,22 +121,66 @@ final class SearchResultCVCell: UICollectionViewCell {
         if convertedProductId == sender.tag {
             self.isLiked?.toggle()
         }
-        guard let id = self.data?.productID,
-              let title = self.data?.title else { return }
         
-        let creatTarget = Product(isLiked: self.isLiked ?? false,
-                           productId: id,
-                           productName: title.cleanString(),
-                           createDate: Date())
-        let removeTarget = repository.fetchFilter(self.data!)
-
-        if self.isLiked == false {
-            repository.removeItem(item: removeTarget)
-        } else if self.isLiked == true {
-            repository.createItem(creatTarget)
+        let convertedLikedProductId = Int(storedData?.productId ?? "")
+        if convertedLikedProductId == sender.tag {
+            self.isLiked?.toggle()
         }
         
+        if let id = self.data?.productID,
+           let mallName = self.data?.mallName,
+           let price = self.data?.lprice,
+           let title = self.data?.title,
+           let link = self.data?.link,
+           let image = self.data?.image {
+            
+            let creatTarget = Product(isLiked: self.isLiked ?? false,
+                                      productId: id,
+                                      mallName: mallName,
+                                      productPrice: price,
+                                      productName: title.cleanString(),
+                                      productLink: link,
+                                      productImage: image,
+                                      createDate: Date())
+            
+            let removeTarget = repository.fetchFilter(self.data!)
+            
+            if self.isLiked == false {
+                repository.removeImageFromDocument(filename: "stored\(removeTarget[0]._id).jpg")
+                repository.removeItem(item: removeTarget)
+            } else if self.isLiked == true {
+                if productImage.image != nil {
+                    repository.saveImageToDocument(filename: "stored\(creatTarget._id).jpg",
+                                                   image: productImage.image!)
+                }
+                repository.createItem(creatTarget)
+            }
+        }
         
+        //        if let id = self.storedData?.productId,
+        //           let mallName = self.storedData?.mallName,
+        //           let price = self.storedData?.productPrice,
+        //           let title = self.storedData?.productName,
+        //           let link = self.storedData?.productLink,
+        //           let image = self.storedData?.productImage {
+        //
+        //            let creatTarget = Product(isLiked: self.isLiked ?? false,
+        //                                      productId: id,
+        //                                      mallName: mallName,
+        //                                      productPrice: price,
+        //                                      productName: title.cleanString(),
+        //                                      productLink: link,
+        //                                      productImage: image,
+        //                                      createDate: Date())
+        guard let stored = storedData else { return }
+        let removeTarget = repository.fetchLikedFilter(stored)
+        
+        if self.isLiked == false {
+            repository.removeImageFromDocument(filename: "stored\(removeTarget[0]._id).jpg")
+            repository.removeItem(item: removeTarget)
+            reloadTrigger?()
+        }
+        //        }
     }
     
     

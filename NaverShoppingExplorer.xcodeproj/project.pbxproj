@@ -13,6 +13,7 @@
 		DE3FEB4C2AABAD6C00591394 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB4B2AABAD6C00591394 /* Product.swift */; };
 		DE3FEB4F2AABCA1100591394 /* ProductTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB4E2AABCA1100591394 /* ProductTableRepository.swift */; };
 		DE3FEB512AABE7B800591394 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB502AABE7B800591394 /* LikedViewController.swift */; };
+		DE3FEB532AABEB5C00591394 /* LikedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB522AABEB5C00591394 /* LikedView.swift */; };
 		DE4931602AAA96FD000D70F9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49315F2AAA96FD000D70F9 /* UILabel+Extension.swift */; };
 		DE50C0372AAA01A6006AD054 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE50C0362AAA01A6006AD054 /* AppDelegate.swift */; };
 		DE50C0392AAA01A6006AD054 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE50C0382AAA01A6006AD054 /* SceneDelegate.swift */; };
@@ -47,6 +48,7 @@
 		DE3FEB4B2AABAD6C00591394 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		DE3FEB4E2AABCA1100591394 /* ProductTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableRepository.swift; sourceTree = "<group>"; };
 		DE3FEB502AABE7B800591394 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
+		DE3FEB522AABEB5C00591394 /* LikedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedView.swift; sourceTree = "<group>"; };
 		DE49315F2AAA96FD000D70F9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		DE50C0332AAA01A6006AD054 /* NaverShoppingExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaverShoppingExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE50C0362AAA01A6006AD054 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				DE50C0642AAA0683006AD054 /* MainView.swift */,
 				DE50C07E2AAA33CB006AD054 /* SearchResultView.swift */,
+				DE3FEB522AABEB5C00591394 /* LikedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				DE50C0722AAA0928006AD054 /* APIKey.swift in Sources */,
 				DE50C07D2AAA2763006AD054 /* SearchResultViewController.swift in Sources */,
 				DE50C06A2AAA07F2006AD054 /* ReusableProtocol.swift in Sources */,
+				DE3FEB532AABEB5C00591394 /* LikedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
