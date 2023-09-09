@@ -127,20 +127,14 @@ final class SearchResultCVCell: UICollectionViewCell {
             self.isLiked?.toggle()
         }
         
-        if let id = self.data?.productID,
-           let mallName = self.data?.mallName,
-           let price = self.data?.lprice,
-           let title = self.data?.title,
-           let link = self.data?.link,
-           let image = self.data?.image {
-            
+        if let data = self.data {
             let creatTarget = Product(isLiked: self.isLiked ?? false,
-                                      productId: id,
-                                      mallName: mallName,
-                                      productPrice: price,
-                                      productName: title.cleanString(),
-                                      productLink: link,
-                                      productImage: image,
+                                      productId: data.productID,
+                                      mallName: data.mallName,
+                                      productPrice: data.lprice,
+                                      productName: data.title.cleanString(),
+                                      productLink: data.link,
+                                      productImage: data.image,
                                       createDate: Date())
             
             let removeTarget = repository.fetchFilter(self.data!)
@@ -157,30 +151,15 @@ final class SearchResultCVCell: UICollectionViewCell {
             }
         }
         
-        //        if let id = self.storedData?.productId,
-        //           let mallName = self.storedData?.mallName,
-        //           let price = self.storedData?.productPrice,
-        //           let title = self.storedData?.productName,
-        //           let link = self.storedData?.productLink,
-        //           let image = self.storedData?.productImage {
-        //
-        //            let creatTarget = Product(isLiked: self.isLiked ?? false,
-        //                                      productId: id,
-        //                                      mallName: mallName,
-        //                                      productPrice: price,
-        //                                      productName: title.cleanString(),
-        //                                      productLink: link,
-        //                                      productImage: image,
-        //                                      createDate: Date())
-        guard let stored = storedData else { return }
-        let removeTarget = repository.fetchLikedFilter(stored)
-        
-        if self.isLiked == false {
-            repository.removeImageFromDocument(filename: "stored\(removeTarget[0]._id).jpg")
-            repository.removeItem(item: removeTarget)
-            reloadTrigger?()
+        if let stored = storedData {
+            let removeTarget = repository.fetchLikedFilter(stored)
+            
+            if self.isLiked == false {
+                repository.removeImageFromDocument(filename: "stored\(removeTarget[0]._id).jpg")
+                repository.removeItem(item: removeTarget)
+                reloadTrigger?()
+            }
         }
-        //        }
     }
     
     
