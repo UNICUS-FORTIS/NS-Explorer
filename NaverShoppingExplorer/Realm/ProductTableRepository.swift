@@ -33,6 +33,13 @@ class ProductTableRepository {
         return result
     }
     
+    func storedFilter(_ data: String) -> Results<Product> {
+        let result = realm.objects(Product.self).where( {
+            $0.productName.contains(data)
+        })
+        return result
+    }
+    
     func createItem(_ item: Product) {
         
         do {

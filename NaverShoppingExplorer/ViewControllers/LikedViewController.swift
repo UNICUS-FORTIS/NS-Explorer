@@ -12,9 +12,12 @@ final class LikedViewController: UIViewController {
     
     
     private let mainView = LikedView()
-    private let likedList:[Product] = []
     private let repository = ProductTableRepository.shared
-    private var tasks: Results<Product>!
+    private var tasks: Results<Product>! {
+        didSet {
+            mainView.collectionView.reloadData()
+        }
+    }
     
     
     override func loadView() {
@@ -26,6 +29,7 @@ final class LikedViewController: UIViewController {
         view.backgroundColor = .white
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
+        mainView.searchController.hidesNavigationBarDuringPresentation = false
         mainView.searchController.searchResultsUpdater = self
         self.definesPresentationContext = true
         self.navigationItem.searchController = mainView.searchController
@@ -45,12 +49,13 @@ final class LikedViewController: UIViewController {
 extension LikedViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text,
-              !text.isEmpty else {return}
-        
-        
+        guard let text = searchController.searchBar.text else { return }
+        let target = repository.storedFilter(text)
+        tasks = target
+        if searchController.searchBar.text == "" {
+            connectRealm()
+        }
     }
-    
 }
 
 extension LikedViewController:UICollectionViewDataSource {
