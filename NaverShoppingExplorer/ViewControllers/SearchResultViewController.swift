@@ -16,6 +16,8 @@ final class SearchResultViewController: UIViewController {
     private let mainView = SearchResultView()
     private let repository = ProductTableRepository.shared
     private var tasks: Results<Product>!
+    private var page = 1
+    private var sortParameter: Int?
     
     var keyword: String? {
         didSet {
@@ -42,6 +44,7 @@ final class SearchResultViewController: UIViewController {
         connectRealm()
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
+        mainView.collectionView.prefetchDataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,16 +58,25 @@ final class SearchResultViewController: UIViewController {
     private func connectRealm() {
         tasks = repository.fetch()
     }
+    
+    private func getSortString(senderTag: Int) -> String {
+        switch senderTag {
+        case 0 : return Parameter.Sort.accuracy
+        case 1 : return Parameter.Sort.date
+        case 2 : return Parameter.Sort.descending
+        case 3 : return Parameter.Sort.ascending
+        default:
+            return Parameter.Sort.date
+        }
+    }
 }
-
 
 extension SearchResultViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let vcGate = WebGateController() // 모달창
-        let vcWeb = WebViewController() // 인터넷창
-        //        let path = self.result?.items[indexPath.item]
+        let vcGate = WebGateController()
+        let vcWeb = WebViewController()
         vcGate.mainView.dismissTrigger = { [weak self] in
             self?.dismiss(animated: true)
         }
@@ -125,6 +137,7 @@ extension SearchResultViewController: UICollectionViewDataSource {
     }
     
     @objc func filterButtonActionInHeader(_ sender: UIButton) {
+        sortParameter = sender.tag
         switch sender.tag {
         case 0 : networkAction(sort: Parameter.Sort.accuracy)
         case 1 : networkAction(sort: Parameter.Sort.date)
@@ -154,7 +167,43 @@ extension SearchResultViewController: UICollectionViewDataSource {
             }
         }
     }
+}
+
+extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        guard let result = self.result else { return }
+        for indexPath in indexPaths {
+            if result.items.count-1 == indexPath.item && page < 10 {
+                page += 1
+                guard let keyword = keyword else { return }
+                let sort = getSortString(senderTag: sortParameter ?? 1)
+                
+                networkmanager.requestData(query: keyword, start: page, sort: sort) { data in
+                    switch data {
+                    case .success(let result):
+                        self.result?.items.append(contentsOf: result.items)
+                        
+                    case .failure(let error):
+                        switch error {
+                        case .dataError:
+                            print("데이터 에러")
+                        case .networkingError:
+                            print("네트워킹 에러")
+                        case .parseError:
+                            print("파싱에러")
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        print("===취소: \(indexPaths)")
+    }
 }
 
 extension SearchResultViewController: UIViewControllerTransitioningDelegate {
