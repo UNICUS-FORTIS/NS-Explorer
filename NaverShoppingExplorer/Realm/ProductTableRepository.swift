@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ProductTableRepository {
+final class ProductTableRepository {
     
     static let shared = ProductTableRepository()
     

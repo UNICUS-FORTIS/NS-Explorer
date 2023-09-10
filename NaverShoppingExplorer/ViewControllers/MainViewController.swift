@@ -22,6 +22,13 @@ final class MainViewController: UIViewController {
         view.backgroundColor = .white
         mainView.searchField.delegate = self
         mainView.searchField.text = "티니핑"
+        navigationController?.setupNaviAppearance()
+        tabBarController?.setupTabbarController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.hidesBarsOnSwipe = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -37,7 +44,7 @@ extension MainViewController:UITextFieldDelegate {
         let vc = SearchResultViewController()
 
         
-        guard let text = mainView.searchField.text else { return false }
+        guard let text = mainView.searchField.text, !text.isEmpty else { return false }
         
         networkManager.requestData(query: text,
                                    start: 1,

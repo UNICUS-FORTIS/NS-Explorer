@@ -12,6 +12,7 @@ enum Constant {
     enum Image {
         static let likedIcon = UIImage(named: "red.heart.circle.fill")
         static let noneLikedIcon = UIImage(named: "gray.heart.circle.fill")
+        static let likeNaviIcon = UIImage(systemName: "heart.fill")
     }
     
     enum Color {

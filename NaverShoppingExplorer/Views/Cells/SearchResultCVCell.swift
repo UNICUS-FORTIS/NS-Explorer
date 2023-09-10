@@ -32,7 +32,7 @@ final class SearchResultCVCell: UICollectionViewCell {
             guard let storedData = storedData else { return }
             let loadedImg = repository.loadImageFromDocument(filename: "stored\(storedData._id).jpg")
             productImage.image = loadedImg
-            mallLabel.text = storedData.mallName
+            mallLabel.text = "[\(storedData.mallName)]"
             productNameLabel.text = storedData.productName
             priceLabel.text = priceLabel.makingCurrency(price: storedData.productPrice)
             likeButton.tag = Int(storedData.productId) ?? 0
@@ -184,7 +184,7 @@ final class SearchResultCVCell: UICollectionViewCell {
         }
         
         labelStackView.snp.makeConstraints { make in
-            make.top.equalTo(productImage.snp.bottom)
+            make.top.equalTo(productImage.snp.bottom).offset(6)
             make.horizontalEdges.equalTo(contentView)
         }
         

@@ -19,7 +19,6 @@ final class LikedViewController: UIViewController {
         }
     }
     
-    
     override func loadView() {
         view = mainView
     }
@@ -27,20 +26,28 @@ final class LikedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        configure()
+        connectRealm()
+    }
+    
+    private func configure() {
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
         mainView.searchController.hidesNavigationBarDuringPresentation = false
         mainView.searchController.searchResultsUpdater = self
-        self.definesPresentationContext = true
-        self.navigationItem.searchController = mainView.searchController
-        connectRealm()
+        mainView.searchController.searchBar.placeholder = "검색어를 입력하세요"
+        definesPresentationContext = true
+        navigationItem.searchController = mainView.searchController
+        navigationController?.setupNaviAppearance()
+        tabBarController?.setupTabbarController()
     }
     
     private func connectRealm() {
         tasks = repository.fetch()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         mainView.collectionView.reloadData()
     }
     
@@ -81,6 +88,28 @@ extension LikedViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let path = tasks[indexPath.item]
+        let vc = WebGateController()
+        
+        vc.mainView.storedData = path
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = self
+        vc.mainView.dismissTrigger = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        let pushTargetVC = WebViewController()
+        pushTargetVC.productLink = "https://msearch.shopping.naver.com/product/\(path.productId)"
+        pushTargetVC.isLiked = path.isLiked
+        vc.mainView.pushTrigger = { [weak self] in
+            self?.navigationController?.pushViewController(pushTargetVC, animated: true)
+        }
+        present(vc, animated: true)
     }
-    
+}
+
+extension LikedViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        let presentationController = CustomPresentationController(presentedViewController: presented, presenting: presenting)
+        return presentationController
+    }
 }

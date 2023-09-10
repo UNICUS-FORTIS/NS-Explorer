@@ -17,7 +17,13 @@ final class SearchResultViewController: UIViewController {
     private let repository = ProductTableRepository.shared
     private var tasks: Results<Product>!
     
-    var keyword: String?
+    var keyword: String? {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.title = "\(self?.keyword ?? "")"
+            }
+        }
+    }
     
     var result: Shopping? {
         didSet {
@@ -40,6 +46,7 @@ final class SearchResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
         repository.checkRealmDirectory()
         repository.checkSchemaVersion()
         mainView.collectionView.reloadData()
@@ -55,6 +62,27 @@ extension SearchResultViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let vcGate = WebGateController() // 모달창
+        let vcWeb = WebViewController() // 인터넷창
+        //        let path = self.result?.items[indexPath.item]
+        vcGate.mainView.dismissTrigger = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        vcGate.mainView.pushTrigger = { [weak self] in
+            self?.navigationController?.pushViewController(vcWeb, animated: true)
+        }
+        
+        if let items = result?.items {
+            let path = items[indexPath.item]
+            vcGate.mainView.data = path
+            vcGate.modalPresentationStyle = .custom
+            vcGate.transitioningDelegate = self
+            
+            vcWeb.productLink = "https://msearch.shopping.naver.com/product/\(path.productID)"
+            let matchedProduct = tasks.first(where: { $0.productId == path.productID })
+            vcWeb.isLiked = matchedProduct != nil ? true : false
+        }
+        present(vcGate, animated: true)
     }
 }
 
@@ -68,8 +96,9 @@ extension SearchResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCVCell.identifier, for: indexPath) as? SearchResultCVCell else  { return UICollectionViewCell() }
         
-        cell.data = self.result?.items[indexPath.item]
-        if let productID = result?.items[indexPath.item].productID {
+        if let items = self.result?.items {
+            cell.data = items[indexPath.item]
+            let productID = items[indexPath.item].productID
             if let matchedProduct = tasks.first(where: { $0.productId == productID }) {
                 cell.isLiked = matchedProduct.isLiked ?? false
             } else {
@@ -128,3 +157,9 @@ extension SearchResultViewController: UICollectionViewDataSource {
     
 }
 
+extension SearchResultViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        let presentationController = CustomPresentationController(presentedViewController: presented, presenting: presenting)
+        return presentationController
+    }
+}

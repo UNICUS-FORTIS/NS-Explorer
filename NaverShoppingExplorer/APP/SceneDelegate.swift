@@ -19,15 +19,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarVC = UITabBarController()
         
-        let vc1 = UINavigationController(rootViewController: MainViewController())
-        let vc2 = UINavigationController(rootViewController: LikedViewController())
+        let vc1 = MainViewController()
+        let vc2 = LikedViewController()
         
-        vc1.title = nil
-        vc2.title = nil
+        let nav1 = UINavigationController(rootViewController: vc1)
+        let nav2 = UINavigationController(rootViewController: vc2)
         
-        tabBarVC.setViewControllers([vc1, vc2], animated: false)
+        nav1.title = nil
+        nav2.title = nil
+        
+        tabBarVC.setViewControllers([nav1, nav2], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.backgroundColor = .white
         tabBarVC.tabBar.tintColor = Constant.Color.naverGreen()
         
         guard let items = tabBarVC.tabBar.items else { return }

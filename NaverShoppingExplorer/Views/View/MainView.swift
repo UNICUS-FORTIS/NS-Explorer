@@ -18,7 +18,7 @@ final class MainView: UIView {
         tf.placeholderColor = .darkGray
         tf.layer.cornerRadius = 8
         tf.layer.borderColor = Constant.Color.naverGreen().cgColor
-        tf.layer.borderWidth = 3
+        tf.layer.borderWidth = 1
         tf.textColor = .black
         tf.clearButtonMode = .whileEditing
         tf.autocapitalizationType = .none
