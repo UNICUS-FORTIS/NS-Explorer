@@ -13,16 +13,19 @@ import TextFieldEffects
 final class MainView: UIView {
     
     lazy var searchField: UITextField = {
-        let tf = HoshiTextField(frame: .zero)
-        tf.placeholder = "검색어를 입력해주세요."
-        tf.placeholderColor = .darkGray
-        tf.layer.cornerRadius = 8
-        tf.layer.borderColor = Constant.Color.naverGreen().cgColor
-        tf.layer.borderWidth = 1
-        tf.textColor = .black
-        tf.clearButtonMode = .whileEditing
-        tf.autocapitalizationType = .none
+        let tf = UITextField()
+        tf.defineSeacrhField()
         return tf
+    }()
+    
+    let networkStatusLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 17)
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        label.textAlignment = .center
+        label.textColor = .red
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -35,19 +38,24 @@ final class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-     func configure() {
+    private func configure() {
         self.addSubview(searchField)
+        self.addSubview(networkStatusLabel)
     }
     
-     func setConstraints() {
+    private func setConstraints() {
         searchField.snp.makeConstraints { make in
             make.centerX.equalTo(self)
             make.top.equalTo(self.safeAreaLayoutGuide).offset(150)
             make.horizontalEdges.equalToSuperview().inset(40)
             make.height.equalTo(self).multipliedBy(0.07)
         }
+        
+        networkStatusLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(self)
+            make.width.equalTo(searchField).multipliedBy(0.8)
+            make.height.equalTo(self).multipliedBy(0.04)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
+        }
     }
-    
-    
-    
 }

@@ -104,6 +104,8 @@ final class SearchResultCVCell: UICollectionViewCell {
         configure()
         setConstraints()
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeButtonActivated), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeButtonInActivated), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -114,6 +116,18 @@ final class SearchResultCVCell: UICollectionViewCell {
         super.prepareForReuse()
         productImage.image = nil
         likeButton.tag = 0
+    }
+    
+    @objc func likeButtonActivated(sender: UIButton)  {
+        UIView.animate(withDuration: 0.3) {
+            sender.transform = CGAffineTransform(scaleX: 4, y: 4)
+        }
+    }
+    
+    @objc func likeButtonInActivated(sender: UIButton)  {
+        UIView.animate(withDuration: 0.3) {
+            sender.transform = CGAffineTransform.identity
+        }
     }
     
     @objc func likeButtonTapped(sender: UIButton)  {

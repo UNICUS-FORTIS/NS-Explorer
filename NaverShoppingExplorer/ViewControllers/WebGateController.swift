@@ -19,6 +19,8 @@ final class WebGateController: UIViewController {
         
         let height = UIScreen.main.bounds.height * 0.7
         preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: height)
+        self.view.layer.cornerRadius = 10
+        self.view.clipsToBounds = true
     }
     
     override func viewDidLoad() {
@@ -46,13 +48,13 @@ final class WebGateController: UIViewController {
             
             if velocity.y >= 150 {
 
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.1) {
                     self.view.frame.origin.y = self.view.frame.size.height
                 } completion: { _ in
-                    self.dismiss(animated: false, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
             } else {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.1) {
                     self.view.frame.origin.y = self.modalStartPosition
                 }
             }

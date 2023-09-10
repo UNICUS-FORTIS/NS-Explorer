@@ -117,6 +117,7 @@ extension SearchResultViewController: UICollectionViewDataSource {
                 cell.isLiked = false
             }
         }
+        
         return cell
     }
     

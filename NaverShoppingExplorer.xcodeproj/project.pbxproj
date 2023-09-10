@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE0B19562AAE1CDD001DD995 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B19552AAE1CDD001DD995 /* UITextField+Extension.swift */; };
+		DE0B19582AAE2E81001DD995 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B19572AAE2E81001DD995 /* NetworkMonitor.swift */; };
 		DE3FEB462AAB4B7A00591394 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB452AAB4B7A00591394 /* String+Extension.swift */; };
 		DE3FEB482AAB52E900591394 /* SearchResultReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB472AAB52E900591394 /* SearchResultReusableView.swift */; };
 		DE3FEB4A2AAB7A5500591394 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FEB492AAB7A5500591394 /* UIImage+Extension.swift */; };
@@ -48,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE0B19552AAE1CDD001DD995 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		DE0B19572AAE2E81001DD995 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		DE3FEB452AAB4B7A00591394 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		DE3FEB472AAB52E900591394 /* SearchResultReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultReusableView.swift; sourceTree = "<group>"; };
 		DE3FEB492AAB7A5500591394 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				DE50C06C2AAA090F006AD054 /* EndPoint.swift */,
 				DE50C0772AAA15E6006AD054 /* Parameter.swift */,
 				DE50C06E2AAA0915006AD054 /* APIService.swift */,
+				DE0B19572AAE2E81001DD995 /* NetworkMonitor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				DE3FEB492AAB7A5500591394 /* UIImage+Extension.swift */,
 				DE3FEB5D2AAD051600591394 /* UINavigation+Extension.swift */,
 				DE3FEB5F2AAD078000591394 /* UITabbarController+Extension.swift */,
+				DE0B19552AAE1CDD001DD995 /* UITextField+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				DE50C0652AAA0683006AD054 /* MainView.swift in Sources */,
 				DE3FEB482AAB52E900591394 /* SearchResultReusableView.swift in Sources */,
 				DE3FEB512AABE7B800591394 /* LikedViewController.swift in Sources */,
+				DE0B19562AAE1CDD001DD995 /* UITextField+Extension.swift in Sources */,
 				DE3FEB462AAB4B7A00591394 /* String+Extension.swift in Sources */,
 				DE50C06D2AAA090F006AD054 /* EndPoint.swift in Sources */,
 				DE50C07B2AAA19B0006AD054 /* Shopping.swift in Sources */,
@@ -374,6 +381,7 @@
 				DE50C07F2AAA33CB006AD054 /* SearchResultView.swift in Sources */,
 				DE4931602AAA96FD000D70F9 /* UILabel+Extension.swift in Sources */,
 				DE3FEB4A2AAB7A5500591394 /* UIImage+Extension.swift in Sources */,
+				DE0B19582AAE2E81001DD995 /* NetworkMonitor.swift in Sources */,
 				DE3FEB5C2AACD43D00591394 /* WebViewController.swift in Sources */,
 				DE3FEB4C2AABAD6C00591394 /* Product.swift in Sources */,
 				DE3FEB582AACB2C000591394 /* WebGateController.swift in Sources */,

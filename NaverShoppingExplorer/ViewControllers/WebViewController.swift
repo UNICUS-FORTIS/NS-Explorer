@@ -15,26 +15,31 @@ class WebViewController: UIViewController, WKUIDelegate {
     lazy var webView = WKWebView(frame: .zero, configuration: webConfiguration)
     var productLink: String?
     
+    
     var isLiked: Bool? {
         didSet {
-            if let isLiked = isLiked {
-                let icon = Constant.Image.likeNaviIcon
-                let rightBarbutton = UIBarButtonItem(image: icon,
-                                                     style: .plain,
-                                                     target: self,
-                                                     action: nil)
-                let iconColor = isLiked ? UIColor.red : UIColor.gray
-                rightBarbutton.tintColor = iconColor
-                navigationItem.rightBarButtonItem = rightBarbutton
-            }
+            attachRightBarButton()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         configure()
         setConstraints()
-        navigationController?.setupWebViewNaviAppearance()
+    }
+    
+    private func attachRightBarButton() {
+        if let isLiked = isLiked {
+            let icon = Constant.Image.likeNaviIcon
+            let iconColor = isLiked ? UIColor.red : UIColor.gray
+            let rightBarbutton = UIBarButtonItem(image: icon,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: nil)
+            rightBarbutton.tintColor = iconColor
+            navigationItem.rightBarButtonItem = rightBarbutton
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
