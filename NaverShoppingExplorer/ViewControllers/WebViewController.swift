@@ -60,9 +60,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         
     }
     
-    private func configure() {
-        navigationController?.hidesBarsOnSwipe = false
-        
+    private func configure() {        
         view.addSubview(webView)
     }
     

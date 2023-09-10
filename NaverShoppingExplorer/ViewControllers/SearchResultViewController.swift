@@ -49,7 +49,6 @@ final class SearchResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnSwipe = true
         repository.checkRealmDirectory()
         repository.checkSchemaVersion()
         mainView.collectionView.reloadData()
@@ -117,7 +116,6 @@ extension SearchResultViewController: UICollectionViewDataSource {
                 cell.isLiked = false
             }
         }
-        
         return cell
     }
     
@@ -127,9 +125,11 @@ extension SearchResultViewController: UICollectionViewDataSource {
             
             guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchResultReusableView.identifier, for: indexPath) as? SearchResultReusableView else { return UICollectionReusableView() }
             
-            view.buttonArray.forEach{ $0.addTarget(self,
-                                                   action: #selector(filterButtonActionInHeader),
-                                                   for: .touchUpInside)}
+            view.buttonArray.forEach { btn in
+                btn.addTarget(self,
+                              action: #selector(filterButtonActionInHeader),
+                              for: .touchUpInside)
+            }
             return view
             
         } else {
@@ -138,7 +138,10 @@ extension SearchResultViewController: UICollectionViewDataSource {
     }
     
     @objc func filterButtonActionInHeader(_ sender: UIButton) {
+               
+        guard sortParameter != sender.tag else { return }
         sortParameter = sender.tag
+        
         switch sender.tag {
         case 0 : networkAction(sort: Parameter.Sort.accuracy)
         case 1 : networkAction(sort: Parameter.Sort.date)
@@ -167,6 +170,14 @@ extension SearchResultViewController: UICollectionViewDataSource {
                 }
             }
         }
+    }
+}
+
+extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let height = UIScreen.main.bounds.height
+        return CGSize(width: mainView.collectionView.frame.width, height: height * 0.038)
     }
 }
 
@@ -203,7 +214,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
     
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        print("===취소: \(indexPaths)")
+        print("\(indexPaths)")
     }
 }
 

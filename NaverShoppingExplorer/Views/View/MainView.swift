@@ -18,6 +18,14 @@ final class MainView: UIView {
         return tf
     }()
     
+    private let appTitle: UILabel = {
+       let label = UILabel()
+        label.textColor = Constant.Color.naverGreen()
+        label.text = "NSExplorer"
+        label.font = .boldSystemFont(ofSize: 40)
+        return label
+    }()
+    
     let networkStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 17)
@@ -41,12 +49,21 @@ final class MainView: UIView {
     private func configure() {
         self.addSubview(searchField)
         self.addSubview(networkStatusLabel)
+        self.addSubview(appTitle)
     }
     
     private func setConstraints() {
+        
+        appTitle.snp.makeConstraints { make in
+            make.center.equalTo(self)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(100)
+            make.horizontalEdges.equalToSuperview().inset(40)
+            make.height.equalTo(self).multipliedBy(0.07)
+        }
+        
         searchField.snp.makeConstraints { make in
             make.centerX.equalTo(self)
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(150)
+            make.top.equalTo(appTitle.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview().inset(40)
             make.height.equalTo(self).multipliedBy(0.07)
         }

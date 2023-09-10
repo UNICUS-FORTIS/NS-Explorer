@@ -12,14 +12,18 @@ extension UITabBarController {
     func setupTabbarController() {
         if #available(iOS 15.0, *) {
             let tabBarAppearance = UITabBarAppearance()
-            tabBarAppearance.configureWithOpaqueBackground()
+            tabBarAppearance.configureWithTransparentBackground()
             tabBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
-            
             tabBar.standardAppearance = tabBarAppearance
             tabBar.scrollEdgeAppearance = tabBarAppearance
-        } else {
             tabBar.isTranslucent = true
-            tabBar.barTintColor = .white
+
+        } else {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithTransparentBackground()
+            tabBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
+            tabBar.standardAppearance = tabBarAppearance
+            tabBar.isTranslucent = true
         }
     }
     
@@ -27,5 +31,5 @@ extension UITabBarController {
         tabBar.backgroundColor = .white
         tabBar.isTranslucent = false
     }
-
+    
 }

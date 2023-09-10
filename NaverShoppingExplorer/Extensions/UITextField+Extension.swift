@@ -21,6 +21,6 @@ extension UITextField {
         self.textColor = .darkGray
         self.clearButtonMode = .whileEditing
         self.autocapitalizationType = .none
-        self.keyboardType = .asciiCapable
+        self.keyboardType = .default
     }
 }

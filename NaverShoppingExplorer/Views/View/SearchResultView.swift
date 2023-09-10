@@ -19,7 +19,13 @@ final class SearchResultView: UIView {
                     withReuseIdentifier: SearchResultReusableView.identifier)
         return cv
     }()
-
+    
+    private let toTopOfViewButton:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "arrow.up.circle.fill"), for: .normal)
+        return btn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -32,12 +38,25 @@ final class SearchResultView: UIView {
     
     private func configure() {
         self.addSubview(collectionView)
-        
+        self.addSubview(toTopOfViewButton)
+        toTopOfViewButton.addTarget(self,
+                                    action: #selector(toTopOfViewButtonTapped),
+                                    for: .touchUpInside)
+    }
+    
+    @objc func toTopOfViewButtonTapped() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
     }
     
     private func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(self)
+        }
+        
+        toTopOfViewButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(self.safeAreaLayoutGuide).offset(-20)
+            make.size.equalTo(40)
         }
     }
     
@@ -46,15 +65,6 @@ final class SearchResultView: UIView {
                                                                      numberOfcrossAxis: 3,
                                                                      spacing: 10,
                                                                      scrollDirection: .vertical)
-        let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
-        layout.headerReferenceSize = CGSize(width: width, height: height * 0.03 )
         return layout
     }
-    
-    
-
-    
-    
-    
 }

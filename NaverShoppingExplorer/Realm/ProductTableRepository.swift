@@ -14,10 +14,12 @@ final class ProductTableRepository {
     
     let realm = try! Realm()
     
+    
     func fetch() -> Results<Product> {
         let data = realm.objects(Product.self).sorted(byKeyPath: "createDate", ascending: false)
         return data
     }
+    
     
     func fetchFilter(_ data: ShoppingResult) -> Results<Product> {
         let result = realm.objects(Product.self).where {
@@ -26,12 +28,14 @@ final class ProductTableRepository {
         return result
     }
     
+    
     func fetchLikedFilter(_ data: Product) -> Results<Product> {
         let result = realm.objects(Product.self).where {
             $0.productId == data.productId
         }
         return result
     }
+    
     
     func storedFilter(_ data: String) -> Results<Product> {
         let result = realm.objects(Product.self).where( {
@@ -77,6 +81,7 @@ final class ProductTableRepository {
     }
     
     func removeItem(item: Results<Product>) {
+        
         do {
             try realm.write {
                 realm.delete(item)
@@ -84,6 +89,7 @@ final class ProductTableRepository {
         } catch {
             print(error)
         }
+        
     }
     
     // MARK: - 도큐먼트 폴더에 이미지를 저장하는 메서드 생성
@@ -107,12 +113,12 @@ final class ProductTableRepository {
         }
     }
     
-    // MARK: - 존재하는 파일 도큐먼트에서 로드
+    
     func loadImageFromDocument(filename:String) -> UIImage {
         guard let documentDirectory =
                 FileManager.default.urls(for: .documentDirectory,
                                          in: .userDomainMask).first else { return UIImage() }
-        // 경로 명세
+
         let fileURL = documentDirectory.appendingPathComponent(filename)
         
         if FileManager.default.fileExists(atPath: fileURL.path) {
@@ -122,13 +128,13 @@ final class ProductTableRepository {
         }
     }
     
-    // MARK: - 파일 제거
+    
     func removeImageFromDocument(filename: String) {
         
         guard let documentDirectory =
                 FileManager.default.urls(for: .documentDirectory,
                                          in: .userDomainMask).first else { return }
-        // 경로 명세
+        
         let fileURL = documentDirectory.appendingPathComponent(filename)
         
         do {
@@ -139,8 +145,9 @@ final class ProductTableRepository {
         }
     }
     
-    // MARK: - Returns Directory Path.
+
     func documentDirectoryPath() -> URL? {
+        
         guard let documentDirectory =
                 FileManager.default.urls(for: .documentDirectory,
                                          in: .userDomainMask).first else { return nil }

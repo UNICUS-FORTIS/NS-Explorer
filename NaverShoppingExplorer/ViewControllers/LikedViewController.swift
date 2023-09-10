@@ -28,6 +28,8 @@ final class LikedViewController: UIViewController {
         view.backgroundColor = .white
         configure()
         connectRealm()
+        navigationController?.setupNaviAppearance()
+        tabBarController?.setupTabbarController()
     }
     
     private func configure() {
@@ -38,8 +40,6 @@ final class LikedViewController: UIViewController {
         mainView.searchController.searchBar.placeholder = "검색어를 입력하세요"
         definesPresentationContext = true
         navigationItem.searchController = mainView.searchController
-        navigationController?.setupNaviAppearance()
-        tabBarController?.setupTabbarController()
     }
     
     private func connectRealm() {
