@@ -41,6 +41,4 @@ class Product: Object {
         self.productImage = productImage
         self.createDate = createDate
     }
-    
-    
 }

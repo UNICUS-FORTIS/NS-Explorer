@@ -28,7 +28,6 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         mainView.searchField.delegate = self
-        mainView.searchField.text = "티니핑"
         navigationController?.setupNaviAppearance()
         tabBarController?.setupTabbarController()
         networkMonitor.networkStatusUpdater = { [weak self] isConnected in
@@ -73,7 +72,6 @@ final class MainViewController: UIViewController {
     }
     
     deinit {
-        print(#function)
         networkMonitor.stopMonitoring()
     }
 }
@@ -83,7 +81,6 @@ extension MainViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         mainView.searchField.resignFirstResponder()
         let vc = SearchResultViewController()
-
 
         guard let text = mainView.searchField.text, !text.isEmpty else { return false }
 
@@ -105,7 +102,8 @@ extension MainViewController:UITextFieldDelegate {
                 }
             }
         }
-
+        
+        mainView.searchField.text = ""
         navigationController?.pushViewController(vc, animated: false)
         
         return true

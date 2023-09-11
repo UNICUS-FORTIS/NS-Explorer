@@ -17,7 +17,7 @@ extension UITabBarController {
             tabBar.standardAppearance = tabBarAppearance
             tabBar.scrollEdgeAppearance = tabBarAppearance
             tabBar.isTranslucent = true
-
+            
         } else {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithTransparentBackground()
@@ -26,10 +26,4 @@ extension UITabBarController {
             tabBar.isTranslucent = true
         }
     }
-    
-    func setupWebViewTabbarController() {
-        tabBar.backgroundColor = .white
-        tabBar.isTranslucent = false
-    }
-    
 }

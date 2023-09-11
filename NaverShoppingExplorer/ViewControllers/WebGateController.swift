@@ -19,6 +19,7 @@ final class WebGateController: UIViewController {
         
         let height = UIScreen.main.bounds.height * 0.7
         preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: height)
+        
         self.view.layer.cornerRadius = 10
         self.view.clipsToBounds = true
     }
@@ -27,6 +28,7 @@ final class WebGateController: UIViewController {
         super.viewDidLoad()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        
         view.addGestureRecognizer(panGestureRecognizer)
     }
     
@@ -40,9 +42,11 @@ final class WebGateController: UIViewController {
         switch gestureRecognizer.state {
         case .began:
             initialTouchPoint = touchPoint
+            
         case .changed:
             let yOffset = touchPoint.y - initialTouchPoint.y
             view.frame.origin.y = max(modalStartPosition + yOffset, modalStartPosition)
+            
         case .ended, .cancelled:
             let velocity = gestureRecognizer.velocity(in: view)
             

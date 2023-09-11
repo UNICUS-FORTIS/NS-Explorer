@@ -89,21 +89,22 @@ extension LikedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let path = tasks[indexPath.item]
-        let vc = WebGateController()
+        let webGate = WebGateController()
         
-        vc.mainView.storedData = path
-        vc.modalPresentationStyle = .custom
-        vc.transitioningDelegate = self
-        vc.mainView.dismissTrigger = { [weak self] in
+        webGate.mainView.storedData = path
+        webGate.modalPresentationStyle = .custom
+        webGate.transitioningDelegate = self
+        
+        webGate.mainView.dismissTrigger = { [weak self] in
             self?.dismiss(animated: true)
         }
-        let pushTargetVC = WebViewController()
-        pushTargetVC.productLink = "https://msearch.shopping.naver.com/product/\(path.productId)"
-        pushTargetVC.isLiked = path.isLiked
-        vc.mainView.pushTrigger = { [weak self] in
-            self?.navigationController?.pushViewController(pushTargetVC, animated: true)
+        
+        let vc = WebViewController()
+        vc.storedData = path
+        webGate.mainView.pushTrigger = { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
-        present(vc, animated: true)
+        present(webGate, animated: true)
     }
 }
 

@@ -59,7 +59,7 @@ final class SearchResultCVCell: UICollectionViewCell {
     
     let likeButton: UIButton = {
         let btn = UIButton()
-        let btnImage = UIImage(named: "gray.heart.circle.fill")
+        let btnImage = Constant.Image.noneLikedIcon
         btn.contentMode = .scaleAspectFit
         btn.setImage(btnImage, for: .normal)
         return btn
@@ -142,7 +142,7 @@ final class SearchResultCVCell: UICollectionViewCell {
         }
         
         if let data = self.data {
-            let creatTarget = Product(isLiked: self.isLiked ?? false,
+            let createTarget = Product(isLiked: self.isLiked ?? false,
                                       productId: data.productID,
                                       mallName: data.mallName,
                                       productPrice: data.lprice,
@@ -158,10 +158,10 @@ final class SearchResultCVCell: UICollectionViewCell {
                 repository.removeItem(item: removeTarget)
             } else if self.isLiked == true {
                 if productImage.image != nil {
-                    repository.saveImageToDocument(filename: "stored\(creatTarget._id).jpg",
+                    repository.saveImageToDocument(filename: "stored\(createTarget._id).jpg",
                                                    image: productImage.image!)
                 }
-                repository.createItem(creatTarget)
+                repository.createItem(createTarget)
             }
         }
         
@@ -175,7 +175,6 @@ final class SearchResultCVCell: UICollectionViewCell {
             }
         }
     }
-    
     
     private func configure() {
         lazy var componentsArray:[UIView] = [productImage, likeButton, labelStackView]
@@ -207,6 +206,5 @@ final class SearchResultCVCell: UICollectionViewCell {
             make.size.equalTo(productImage).multipliedBy(0.2)
         }
     }
-    
-    
+
 }

@@ -76,10 +76,15 @@ extension SearchResultViewController: UICollectionViewDelegate {
         
         let vcGate = WebGateController()
         let vcWeb = WebViewController()
+        
         vcGate.mainView.dismissTrigger = { [weak self] in
             self?.dismiss(animated: true)
         }
+        
         vcGate.mainView.pushTrigger = { [weak self] in
+            guard let result = self?.result else { return }
+            vcWeb.title = self?.keyword
+            vcWeb.data = result.items[indexPath.item]
             self?.navigationController?.pushViewController(vcWeb, animated: true)
         }
         
@@ -89,7 +94,6 @@ extension SearchResultViewController: UICollectionViewDelegate {
             vcGate.modalPresentationStyle = .custom
             vcGate.transitioningDelegate = self
             
-            vcWeb.productLink = "https://msearch.shopping.naver.com/product/\(path.productID)"
             let matchedProduct = tasks.first(where: { $0.productId == path.productID })
             vcWeb.isLiked = matchedProduct != nil ? true : false
         }

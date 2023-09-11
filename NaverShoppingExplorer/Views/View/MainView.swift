@@ -55,7 +55,7 @@ final class MainView: UIView {
     private func setConstraints() {
         
         appTitle.snp.makeConstraints { make in
-            make.center.equalTo(self)
+            make.centerX.equalTo(self)
             make.top.equalTo(self.safeAreaLayoutGuide).offset(100)
             make.horizontalEdges.equalToSuperview().inset(40)
             make.height.equalTo(self).multipliedBy(0.07)

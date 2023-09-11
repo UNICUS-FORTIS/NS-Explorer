@@ -113,7 +113,6 @@ final class ProductTableRepository {
         }
     }
     
-    
     func loadImageFromDocument(filename:String) -> UIImage {
         guard let documentDirectory =
                 FileManager.default.urls(for: .documentDirectory,

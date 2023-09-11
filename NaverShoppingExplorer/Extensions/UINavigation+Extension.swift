@@ -24,16 +24,5 @@ extension UINavigationController {
         navigationBar.isTranslucent = true
         navigationBar.topItem?.backButtonTitle = "" // ok
     }
-    
-    func setupWebViewNaviAppearance() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundImage = UIImage()
-        appearance.shadowImage = UIImage()
-        appearance.backgroundColor = .white
-        navigationBar.standardAppearance = appearance
-        navigationBar.scrollEdgeAppearance = appearance
-        navigationBar.topItem?.backButtonTitle = ""
-        navigationBar.isTranslucent = false
-    }
 }
 
