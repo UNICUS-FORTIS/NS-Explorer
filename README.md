@@ -95,9 +95,10 @@
 <img width="40%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/c2e0b967-de33-45be-89fd-da1fc90a5f28">
 <img width="40%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/9d0e8a79-1aef-4729-af44-3518f6222f44">
 </p>
+
 - Open API 에서 ProductID 로 상품을 검색하는 기능이 없기때문에 상품을 찜했을 때 목록에서 상품을 썸네일을 표시하기 위하여 썸네일을 Realm 에 저장하였습니다.
 - Cell 내의 버튼에 대한 Sender.tag 는 고유해야 하므로 productID 를 할당하고 해당 tag 를 가진 버튼이 touch up inside 되었을 때 저장/제거 기능이 동작하도록 하였습니다.
-<br>
+  
 <br>
 4. 찜한 상품 내 검색 기능
 
