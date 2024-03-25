@@ -60,7 +60,8 @@
 <img width="20%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/46cde816-3124-422e-92e6-818b67f30427"/>
 </p>
 <br>
-1.검색된 상품을 '정확도순', '등록일자순', '가격높은순', '가격낮은순' 으로 정렬하는 기능과 선택된 버튼의 표시
+
+**1. 검색된 상품을 '정확도순', '등록일자순', '가격높은순', '가격낮은순' 으로 정렬하는 기능과 선택된 버튼의 표시**<br>
 <br>
 <img width="70%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/e5c2630d-8782-4a2b-acb8-306fcfc40358">
 
@@ -77,7 +78,7 @@
 - 버튼의 컬러가 변경됨과 동시에 선택된 버튼이 커졌다가 작아지는 애니매이션으로 인터렉션을 실행합니다.
 <br>
 
-2. 찜한 상품 아이콘 표시 관리
+**2. 저장된 상품 아이콘 표시 관리**<br>
 <br>
 <p>
 <img width="40%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/115a6b45-e10f-482a-8f03-2461d63ff77e">
@@ -89,7 +90,7 @@
 - 셀을 표시 할 때 Realm 에 저장된 productID 가 검색 결과 응답값의 productID 와 같을 경우 찜 아이콘의 컬러가 Red 로 변경되도록 하였습니다.
 <br>
 
-3. 찜한 상품의 썸네일 저장과 삭제
+**3. 저장된 상품의 썸네일 저장과 삭제**<br>
 <br>
 <p>
 <img width="40%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/c2e0b967-de33-45be-89fd-da1fc90a5f28">
@@ -98,18 +99,16 @@
 
 - Open API 에서 ProductID 로 상품을 검색하는 기능이 없기때문에 상품을 찜했을 때 목록에서 상품을 썸네일을 표시하기 위하여 썸네일을 Realm 에 저장하였습니다.
 - Cell 내의 버튼에 대한 Sender.tag 는 고유해야 하므로 productID 를 할당하고 해당 tag 를 가진 버튼이 touch up inside 되었을 때 저장/제거 기능이 동작하도록 하였습니다.
-  
 <br>
-4. 찜한 상품 내 검색 기능
 
-<br>
+**4. 저장된 상품 내 검색 기능**
 <br>
 <p>
 <img width="30%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/992e341e-47aa-4d6e-a31a-4027941f15fc"/>
 <img width="30%" src="https://github.com/UNICUS-FORTIS/NaverShoppingExplorer/assets/110699030/da56005e-9a2d-4b90-8e93-1eb9961fa021"/>
 </p>
 
-- NS Explorer 의 찜한 상품 내 검색 기능은 API 에 엑세스 하지 않고 Local 에서만 동작하므로 뷰컨트롤러에서 UISearchResultsUpdating 프로토콜을 채택하여 UISearchController 에서 실시간 검색 기능을 지원하도록 하였습니다.
+- NS Explorer 의 저장된 상품 내 검색 기능은 API 에 엑세스 하지 않고 Local 에서만 동작하므로 뷰컨트롤러에서 UISearchResultsUpdating 프로토콜을 채택하여 UISearchController 에서 실시간 검색 기능을 지원하도록 하였습니다.
 <br>
 <br>
 
