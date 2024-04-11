@@ -40,17 +40,16 @@
 - NetworkMonitor
 
 ## 주요 기술 🌖
-- URL Session 을 사용하여 Naver Open API 에 통하여 상품을 검색 할 수 있도록 하였습니다.
+- URL Session 의 dataTask 메서드를 사용하여 비동기 네트워킹을 구현하였습니다.
+- NetworkMonitor 프레임워크를 사용하여 네트워크의 커넥션 상태를 토스트 알림으로 보여주도록 구현하였습니다.
+- FileManager 와 Realm 의 활용으로 상품 섬네일의 File Directory 를 관리하도록 구현하였습니다.
 - CollectionView 의 UICollectionViewDataSourcePrefetching 프로토콜을 채택하여 페이지네이션 기능을 구현하였습니다.
-- Realm Swift 를 사용해 상품 저장 기능을 구현하였습니다.
-- 상품을 저장 할 때 아이콘이 잠시 커졌다 작아지는 인터렉션을 추가하였습니다.
+- Realm Repository Pattern 을 사용하여 CRUD 인터페이스를 설계하였습니다. 
 - 상품을 저장 할 때 썸네일을 Realm 에 저장하여 이후 저장된 상품 목록에서 썸네일을 표시 할 수 있도록 하였습니다.
-- 저장된 상품은 두번째 탭에서 모아서 볼 수 있도록 하였습니다.
 - 저장된 상품이 API 에서 다시 검색 될 때 아이콘의 컬러가 다르게 표시되도록 하였습니다.
-- 저장된 상품을 표시하는 뷰컨트롤러에서 UISearchResultsUpdating 프로토콜을 채택하여 실시간으로 검색 할 수 있도록 하였습니다.
-- 저장된 상품을 모은 탭에서도 상품을 제거 할 수 있습도록 구현하였습니다.
-- WebView 에서 상품의 상세 정보를 볼 수 있으며 WebView의 네비게이션 영역 우측에서 저장된 상품인지 여부를 확인 할 수 있도록 아이콘의 컬러를 디스플레이 하였습니다.
-- 애플의 Network FrameWork 를 사용하여 NetworkMonitor 로 네트워크의 커넥션 상태를 토스트 알림으로 보여주도록 구현하였습니다.
+- UISearchResultsUpdating 프로토콜을 활용하여 실시간 검색 기능을 구현하였습니다.
+- WebView 를 통해 웹에서 상품 상세 정보를 조회 할 수 있도록 하였습니다.
+
 
 ## 개발시 고려 사항 💎
 <p>
